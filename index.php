@@ -116,8 +116,11 @@ $current_year = date('Y');
 <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm font-['Manrope'] antialiased">
   <div class="max-w-[1280px] mx-auto flex justify-between items-center px-8 h-20">
 
-    <!-- Logo -->
-    <img src="assets/img/screen.png" alt="Tobbys Suite Logo" href="index.php" class="w-18 h-12">
+   
+  <img src="assets/img/screen2.png" 
+       alt="Tobby's Suite Logo" 
+       class="h-16 w-auto">
+
     
 
     <!-- Desktop Links -->
@@ -425,9 +428,10 @@ $current_year = date('Y');
 
     <!-- Brand -->
     <div class="col-span-1">
-      <a href="index.php" class="text-lg font-bold text-slate-900 mb-6 block hover:text-yellow-600 transition-colors">
-        Tobby's Suite
-      </a>
+    <img src="assets/img/screen2.png" 
+       alt="Tobby's Suite Logo" 
+       class="h-16 w-auto">
+
       <p class="text-slate-500 leading-relaxed mb-6">
         Redefining luxury real estate technology in Nigeria through world-class engineering and editorial design.
       </p>

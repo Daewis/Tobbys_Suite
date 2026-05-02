@@ -17,8 +17,9 @@ $nav_items = [
 <!-- ===== DESKTOP SIDEBAR ===== -->
 <aside class="hidden lg:flex w-64 bg-slate-900 text-white flex-col shrink-0 h-screen sticky top-0">
   <div class="p-6 border-b border-white/10 flex items-center gap-3">
-    <span class="material-symbols-outlined text-yellow-400">home</span>
-    <span class="font-black tracking-tight uppercase text-lg">My Suite</span>
+  <img src="assets/img/screen.png" 
+       alt="Tobby's Suite Logo" 
+       class="h-16 w-auto">
   </div>
 
   <nav class="flex-1 p-4 space-y-1">

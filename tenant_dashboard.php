@@ -68,9 +68,13 @@ include __DIR__ . '/includes/tenant_head.php';
           <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Lease Status</p>
           <p class="text-xs font-bold text-green-600">Active</p>
         </div>
+        <button class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
         <div class="w-10 h-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black">
           <?= substr($tenant['name'], 0, 1) ?>
         </div>
+        <div class="flex items-center gap-4">
       </div>
     </nav>
 

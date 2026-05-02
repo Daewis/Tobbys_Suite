@@ -30,8 +30,9 @@ function nav_link($file, $icon, $label, $current) {
   <!-- Logo + User Badge -->
   <div class="p-6 border-b border-white/10">
     <div class="flex items-center gap-3 mb-4">
-      <span class="material-symbols-outlined text-yellow-400">domain</span>
-      <span class="font-black tracking-tight uppercase">Tobby's Suite</span>
+    <img src="assets/img/screen.png" 
+       alt="Tobby's Suite Logo" 
+       class="h-16 w-auto">
     </div>
     <!-- Logged-in user pill -->
     <div class="flex items-center gap-3 bg-white/5 rounded-2xl px-3 py-2.5">

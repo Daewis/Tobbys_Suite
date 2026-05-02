@@ -1,48 +1,79 @@
 <?php
 require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/notifications.php';
 
 if (!isLoggedIn() || !in_array($_SESSION['role'], ['admin', 'manager'])) {
     header('Location: login.php');
     exit;
 }
 
-$db = getDB();
-$error = '';
+$db      = getDB();
+$error   = '';
 $success = '';
 
 // Handle Status Change
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
-    $id = (int)$_POST['complaint_id'];
+    $id     = (int) $_POST['complaint_id'];
     $status = $_POST['status'];
-    
+
     try {
         $stmt = $db->prepare("UPDATE complaints SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
         $stmt->execute([$status, $id]);
         $success = "Request status updated to $status!";
+
+        // Fetch complaint details for notification
+        $stmt = $db->prepare("SELECT c.subject, c.tenant_id FROM complaints c WHERE c.id = ?");
+        $stmt->execute([$id]);
+        $complaint = $stmt->fetch();
+
+        if ($complaint) {
+            if ($status === 'Resolved') {
+                // Notify tenant their issue is resolved
+                notifyTenant(
+                    $db,
+                    $complaint['tenant_id'],
+                    'maintenance',
+                    'Maintenance Request Resolved',
+                    'Your complaint "' . $complaint['subject'] . '" has been marked as resolved. Thank you for your patience.',
+                    'tenant_complaints.php',
+                    $_SESSION['user_id']
+                );
+            } elseif ($status === 'In Progress') {
+                // Notify tenant their issue is being worked on
+                notifyTenant(
+                    $db,
+                    $complaint['tenant_id'],
+                    'maintenance',
+                    'Maintenance In Progress',
+                    'Your complaint "' . $complaint['subject'] . '" is now being attended to by our team.',
+                    'tenant_complaints.php',
+                    $_SESSION['user_id']
+                );
+            }
+        }
+
     } catch (PDOException $e) {
         $error = "Update failed: " . $e->getMessage();
     }
 }
 
-// Fetch all complaints with tenant and apartment info
-$complaints = $db->query("SELECT c.*, t.name as tenant_name, a.unit_number 
-                         FROM complaints c 
-                         JOIN tenants t ON c.tenant_id = t.id 
-                         JOIN apartments a ON c.apartment_id = a.id 
-                         ORDER BY c.created_at DESC")->fetchAll();
+// Fetch all complaints
+$complaints = $db->query("SELECT c.*, t.name as tenant_name, a.unit_number
+                           FROM complaints c
+                           JOIN tenants t ON c.tenant_id = t.id
+                           JOIN apartments a ON c.apartment_id = a.id
+                           ORDER BY c.created_at DESC")->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Maintenance Queue | Tobby’s Suite</title>
+  <title>Maintenance Queue | Tobby's Suite</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config={theme:{extend:{colors:{"primary":"#1e293b","secondary":"#fbbf24"}}}}
-  </script>
+  <script>tailwind.config={theme:{extend:{colors:{"primary":"#1e293b","secondary":"#fbbf24"}}}}</script>
 </head>
 <body class="bg-slate-50 min-h-screen flex">
 
@@ -57,7 +88,13 @@ $complaints = $db->query("SELECT c.*, t.name as tenant_name, a.unit_number
       <?php if ($success): ?>
         <div class="p-4 bg-green-50 text-green-700 rounded-xl border border-green-100 flex items-center gap-3 text-sm font-bold">
           <span class="material-symbols-outlined">check_circle</span>
-          <?= $success ?>
+          <?= htmlspecialchars($success) ?>
+        </div>
+      <?php endif; ?>
+      <?php if ($error): ?>
+        <div class="p-4 bg-red-50 text-red-700 rounded-xl border border-red-100 flex items-center gap-3 text-sm font-bold">
+          <span class="material-symbols-outlined">error</span>
+          <?= htmlspecialchars($error) ?>
         </div>
       <?php endif; ?>
 
@@ -65,7 +102,10 @@ $complaints = $db->query("SELECT c.*, t.name as tenant_name, a.unit_number
         <?php foreach ($complaints as $c): ?>
         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4 hover:shadow-md transition-shadow">
           <div class="flex justify-between items-start">
-            <span class="px-2 py-1 rounded-full text-[10px] font-black uppercase <?= $c['status'] === 'Pending' ? 'bg-orange-50 text-orange-600' : ($c['status'] === 'In Progress' ? 'bg-blue-50 text-blue-600' : 'bg-green-50 text-green-600') ?>">
+            <span class="px-2 py-1 rounded-full text-[10px] font-black uppercase
+              <?= $c['status'] === 'Pending'     ? 'bg-orange-50 text-orange-600' :
+                 ($c['status'] === 'In Progress' ? 'bg-blue-50 text-blue-600'     :
+                                                   'bg-green-50 text-green-600') ?>">
               <?= $c['status'] ?>
             </span>
             <p class="text-[10px] font-mono text-slate-400"><?= date('M d, H:i', strtotime($c['created_at'])) ?></p>
@@ -79,23 +119,26 @@ $complaints = $db->query("SELECT c.*, t.name as tenant_name, a.unit_number
           <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl">
             <?= nl2br(htmlspecialchars($c['description'])) ?>
           </p>
-          
+
           <form method="POST" class="flex gap-2">
             <input type="hidden" name="complaint_id" value="<?= $c['id'] ?>">
             <select name="status" class="flex-1 p-2 bg-slate-50 border border-slate-100 rounded-xl text-[10px] font-black uppercase outline-none focus:ring-1 focus:ring-slate-900">
-              <option value="Pending" <?= $c['status'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
+              <option value="Pending"     <?= $c['status'] === 'Pending'     ? 'selected' : '' ?>>Pending</option>
               <option value="In Progress" <?= $c['status'] === 'In Progress' ? 'selected' : '' ?>>In Progress</option>
-              <option value="Resolved" <?= $c['status'] === 'Resolved' ? 'selected' : '' ?>>Resolved</option>
+              <option value="Resolved"    <?= $c['status'] === 'Resolved'    ? 'selected' : '' ?>>Resolved</option>
             </select>
-            <button type="submit" name="update_status" class="bg-slate-900 text-white p-2 rounded-xl hover:bg-slate-800 transition-all">
+            <button type="submit" name="update_status"
+                    class="bg-slate-900 text-white p-2 rounded-xl hover:bg-slate-800 transition-all"
+                    title="Save status">
               <span class="material-symbols-outlined text-sm">save</span>
             </button>
           </form>
         </div>
         <?php endforeach; ?>
+
         <?php if (empty($complaints)): ?>
           <div class="col-span-full p-12 text-center bg-white rounded-2xl border border-dashed border-slate-200">
-            <span class="material-symbols-outlined text-4xl text-slate-200 mb-2">engineering</span>
+            <span class="material-symbols-outlined text-4xl text-slate-200 mb-2 block">engineering</span>
             <p class="text-slate-400 text-sm italic">No maintenance requests yet.</p>
           </div>
         <?php endif; ?>
