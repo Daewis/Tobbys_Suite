@@ -31,14 +31,14 @@ define('DB_PASS', $_ENV['DB_PASS'] ?? '');
 //define('AI_MODEL', $_ENV['AI_MODEL'] ?? 'gemma2');
 
 // 4. Payment & Suite Details
-define('PAYSTACK_PUBLIC_KEY', $_ENV['PAYSTACK_PUBLIC_KEY'] ?? 'pk_test_xxxx');
-define('PAYSTACK_SECRET_KEY', $_ENV['PAYSTACK_SECRET_KEY'] ?? 'sk_test_xxxx');
+define('PAYSTACK_PUBLIC_KEY', $_ENV['PAYSTACK_PUBLIC_KEY']);
+define('PAYSTACK_SECRET_KEY', $_ENV['PAYSTACK_SECRET_KEY']);
 define('CURRENCY_SYMBOL', '₦');
 define('SUITE_NAME', "Tobby's Suite");
 
 // Supabase Keys
-define('SUPABASE_URL', $_ENV['SUPABASE_URL'] ?: 'https://your-project.supabase.co');
-define('SUPABASE_ANON_KEY', $_ENV['SUPABASE_ANON_KEY'] ?: 'your-anon-key');
+define('SUPABASE_URL', $_ENV['SUPABASE_URL']);
+define('SUPABASE_ANON_KEY', $_ENV['SUPABASE_ANON_KEY']);
 
 // 5. System Paths & Timezone
 date_default_timezone_set('Africa/Lagos');

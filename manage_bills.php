@@ -12,11 +12,15 @@ $success = '';
 
 // Handle Bill Generation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_bill'])) {
-    $tenant_id = (int)$_POST['tenant_id'];
-    $bill_type = trim($_POST['bill_type']);
-    $amount = (float)$_POST['amount'];
-    $month_year = trim($_POST['month_year']);
-    $due_date = trim($_POST['due_date']);
+  $tenant_id  = isset($_POST['tenant_id'])  ? (int)$_POST['tenant_id']        : 0;
+  $bill_type  = isset($_POST['bill_type'])  ? trim($_POST['bill_type'])        : '';
+  $amount     = isset($_POST['amount'])     ? (float)$_POST['amount']         : 0;
+  $month_year = isset($_POST['month_year']) ? trim($_POST['month_year'])       : '';
+  $due_date   = isset($_POST['due_date'])   ? trim($_POST['due_date'])         : '';
+
+  if (!$tenant_id || !$bill_type || !$amount || !$due_date) {
+      $error = 'Please fill in all required fields.';
+  } else {
 
     try {
         $stmt = $db->prepare("INSERT INTO bills (tenant_id, bill_type, amount, month_year, due_date) VALUES (?, ?, ?, ?, ?)");
@@ -25,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_bill'])) {
     } catch (PDOException $e) {
         $error = "Error generating bill: " . $e->getMessage();
     }
+  }
 }
 
 // Handle Mark as Paid
