@@ -20,11 +20,11 @@ function loadEnv($path) {
 loadEnv(__DIR__ . '/../.env');
 
 // 2. Database Constants
-define('DB_HOST', $_ENV['DB_HOST'] ?? '127.0.0.1');
-define('DB_PORT', $_ENV['DB_PORT'] ?? '3306');
-define('DB_NAME', $_ENV['DB_NAME'] ?? 'tobbys_suite');
-define('DB_USER', $_ENV['DB_USER'] ?? 'root');
-define('DB_PASS', $_ENV['DB_PASS'] ?? '');
+define('DB_HOST', getenv('MYSQLHOST') ?: '127.0.0.1');
+define('DB_PORT', getenv('MYSQLPORT') ?: '3306');
+define('DB_NAME', getenv('MYSQLDATABASE') ?: 'tobbys_suite');
+define('DB_USER', getenv('MYSQLUSER') ?: 'root');
+define('DB_PASS', getenv('MYSQLPASSWORD') ?: '');
 
 // 3. AI Infrastructure (Google AI Studio Local Alternative)
 //define('LOCAL_AI_ENDPOINT', $_ENV['LOCAL_AI_ENDPOINT'] ?? 'http://localhost:11434/api/generate'); // Ollama default
