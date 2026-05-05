@@ -116,12 +116,9 @@ $current_year = date('Y');
 <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm font-['Manrope'] antialiased">
   <div class="max-w-[1280px] mx-auto flex justify-between items-center px-8 h-20">
 
-   
-  <img src="assets/img/screen2.png" 
-       alt="Tobby's Suite Logo" 
-       class="h-16 w-auto">
-
-    
+    <img src="assets/img/screen2.png"
+         alt="Tobby's Suite Logo"
+         class="h-16 w-auto">
 
     <!-- Desktop Links -->
     <div class="hidden md:flex gap-8 items-center">
@@ -162,7 +159,7 @@ $current_year = date('Y');
         <span class="text-secondary-container">Living Experience</span>
       </h1>
       <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">
-        The intersection of Nigerian luxury real estate and Silicon Valley tech. Manage your properties with an editorial-grade interface designed for high-net-worth owners and modern tenants.
+        Built from the ground up for Nigerian landlords, agents, and tenants. Manage your properties with a platform that understands our market — from Lekki to Abuja, from Lagos Island to Port Harcourt.
       </p>
       <div class="flex flex-wrap gap-4">
         <a href="register.php"
@@ -189,7 +186,7 @@ $current_year = date('Y');
           <span class="material-symbols-outlined text-secondary-container" style="font-variation-settings:'FILL' 1;">star</span>
           <span class="font-label-bold text-primary-container">PREMIUM ACCESS</span>
         </div>
-        <p class="text-xs text-on-surface-variant">Exclusive property management for Nigeria's elite real estate portfolio.</p>
+        <p class="text-xs text-on-surface-variant">Trusted by property owners and tenants across Nigeria.</p>
       </div>
     </div>
 
@@ -228,7 +225,7 @@ $current_year = date('Y');
 <section id="features" class="py-section-gap bg-white">
   <div class="max-w-[1280px] mx-auto px-8">
     <div class="text-center mb-20">
-      <h2 class="font-headline-lg text-headline-lg text-primary-container mb-4">Precision Engineering for Modern Living</h2>
+      <h2 class="font-headline-lg text-headline-lg text-primary-container mb-4">Everything You Need to Run Your Property</h2>
       <div class="w-20 h-1.5 bg-[#FACC15] mx-auto"></div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -238,37 +235,37 @@ $current_year = date('Y');
         [
           'icon'  => 'security',
           'title' => 'Secure Lease Management',
-          'desc'  => 'Automated contract generation with digital signatures and localized compliance protocols for the Nigerian market.',
+          'desc'  => 'Automated agreement generation with digital sign-off and compliance built around Nigerian tenancy law and local market norms.',
           'link'  => 'manage_documents.php',
         ],
         [
           'icon'  => 'payments',
           'title' => 'Instant Rent Tracking',
-          'desc'  => 'Real-time financial dashboard with multi-currency support and automated invoicing for high-value transactions.',
+          'desc'  => 'Real-time financial dashboard with Naira-first support and automated invoicing so you always know who has paid and who hasn\'t.',
           'link'  => 'manage_payments.php',
         ],
         [
           'icon'  => 'engineering',
           'title' => '24/7 Maintenance',
-          'desc'  => 'Sophisticated request system connecting tenants directly to certified luxury-grade service providers instantly.',
+          'desc'  => 'A simple request system connecting tenants directly to trusted, verified service providers — fast and without the runaround.',
           'link'  => 'manage_complaints.php',
         ],
         [
           'icon'  => 'notifications_active',
           'title' => 'Smart Rent Reminders',
-          'desc'  => 'Automated reminder workflows that reduce late payments and keep cash flow predictable month-over-month.',
+          'desc'  => 'Automated reminder workflows that reduce late payments and keep your cash flow steady every month.',
           'link'  => 'manage_reminders.php',
         ],
         [
           'icon'  => 'analytics',
           'title' => 'Financial Analytics',
-          'desc'  => 'Granular reporting across all units — occupancy rates, collection health, and yield projections at a glance.',
+          'desc'  => 'Clear reporting across all your units — occupancy rates, collection health, and income summaries in one place.',
           'link'  => 'admin_reports.php',
         ],
         [
           'icon'  => 'person_pin_circle',
           'title' => 'Visitor Management',
-          'desc'  => 'Digital visitor log with real-time entry tracking and automated host notification for premium security.',
+          'desc'  => 'Digital visitor log with real-time entry tracking and instant host notification for better estate security.',
           'link'  => 'manage_visitors.php',
         ],
       ];
@@ -301,23 +298,23 @@ $current_year = date('Y');
       <div class="md:col-span-5 pr-12">
         <span class="font-label-bold text-secondary tracking-widest uppercase mb-4 block">Product Showcase</span>
         <h2 class="font-headline-lg text-headline-lg text-primary-container mb-6 leading-tight">
-          Sophistication Behind Every Screen
+          A Platform Built for the Nigerian Landlord
         </h2>
         <p class="font-body-lg text-on-surface-variant mb-8">
-          Inspired by Silicon Valley's most efficient dashboards, our interface removes the clutter and focuses on what matters: your yield and your peace of mind.
+          Clean, practical, and straightforward — our dashboard puts the numbers that matter front and centre, so you spend less time chasing and more time earning.
         </p>
         <ul class="space-y-4 mb-10">
           <li class="flex items-center gap-3">
             <span class="material-symbols-outlined text-secondary-container" style="font-variation-settings:'FILL' 1;">check_circle</span>
-            <span class="font-body-md text-primary-container">Predictive Analytics Dashboard</span>
+            <span class="font-body-md text-primary-container">At-a-Glance Financial Overview</span>
           </li>
           <li class="flex items-center gap-3">
             <span class="material-symbols-outlined text-secondary-container" style="font-variation-settings:'FILL' 1;">check_circle</span>
-            <span class="font-body-md text-primary-container">One-Click Tenant Onboarding</span>
+            <span class="font-body-md text-primary-container">Quick and Easy Tenant Onboarding</span>
           </li>
           <li class="flex items-center gap-3">
             <span class="material-symbols-outlined text-secondary-container" style="font-variation-settings:'FILL' 1;">check_circle</span>
-            <span class="font-body-md text-primary-container">High-Fidelity Financial Reporting</span>
+            <span class="font-body-md text-primary-container">Detailed Rent & Income Reports</span>
           </li>
         </ul>
         <div class="flex gap-4">
@@ -403,9 +400,9 @@ $current_year = date('Y');
     <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#FACC15] via-transparent to-transparent"></div>
   </div>
   <div class="max-w-[800px] mx-auto px-8 text-center relative z-10">
-    <h2 class="font-display-xl text-headline-lg text-white mb-8">Transform Your Property Management Today</h2>
+    <h2 class="font-display-xl text-headline-lg text-white mb-8">Take Control of Your Property Today</h2>
     <p class="font-body-lg text-on-primary-container mb-12">
-      Join the elite network of property owners who have transitioned to a more intelligent, transparent, and luxury-focused management style.
+      Join landlords and property managers across Nigeria who trust Tobby's Suite to keep things organised, transparent, and stress-free.
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
       <a href="register.php"
@@ -414,7 +411,7 @@ $current_year = date('Y');
       </a>
       <a href="mailto:support@tobbyssuite.com"
          class="border border-white/30 backdrop-blur-sm text-white px-12 py-5 rounded-lg font-label-bold text-xl hover:bg-white/10 transition-all">
-        Talk to Sales
+        Talk to Us
       </a>
     </div>
   </div>
@@ -428,12 +425,12 @@ $current_year = date('Y');
 
     <!-- Brand -->
     <div class="col-span-1">
-    <img src="assets/img/screen2.png" 
-       alt="Tobby's Suite Logo" 
-       class="h-16 w-auto">
+      <img src="assets/img/screen2.png"
+           alt="Tobby's Suite Logo"
+           class="h-16 w-auto">
 
       <p class="text-slate-500 leading-relaxed mb-6">
-        Redefining luxury real estate technology in Nigeria through world-class engineering and editorial design.
+        A Nigerian-built property management platform helping landlords and tenants across the country stay organised and in control.
       </p>
       <div class="flex gap-4">
         <a href="#" class="material-symbols-outlined text-slate-400 hover:text-yellow-500 cursor-pointer transition-colors">public</a>
@@ -469,7 +466,7 @@ $current_year = date('Y');
     <!-- Newsletter -->
     <div>
       <h4 class="font-bold text-slate-900 mb-6">Newsletter</h4>
-      <p class="text-slate-500 mb-4">Stay updated with luxury living tech.</p>
+      <p class="text-slate-500 mb-4">Stay updated on property management tips and platform news.</p>
       <form method="POST" action="#contact" class="flex gap-2">
         <input type="email" name="newsletter_email" placeholder="Email"
                class="bg-white border border-slate-200 px-4 py-2 rounded flex-1 focus:ring-1 focus:ring-yellow-400 outline-none text-sm"/>
@@ -497,7 +494,7 @@ $current_year = date('Y');
 
   <!-- Bottom bar -->
   <div class="max-w-[1280px] mx-auto px-8 py-6 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-xs">
-    <span>© <?= $current_year ?> Tobby's Suite. All rights reserved. Nigeria Luxury Real Estate Tech.</span>
+    <span>© <?= $current_year ?> Tobby's Suite. All rights reserved. Nigerian Property Management Technology.</span>
     <div class="flex gap-6">
       <a href="#" class="hover:text-slate-700 transition-colors">Privacy Policy</a>
       <a href="#" class="hover:text-slate-700 transition-colors">Terms of Service</a>
